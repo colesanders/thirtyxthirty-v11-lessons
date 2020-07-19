@@ -1,0 +1,54 @@
+<mat-card class="mat-card-light"> 
+    <mat-card-header style="display: flex; justify-content: space-between;">
+      <mat-card-title class="accent">
+        <span *ngIf="lessonForm.value.id !== null; else elseBlock">
+          Editing Lesson
+        </span>
+        <ng-template #elseBlock>
+          Create Lesson
+        </ng-template>
+      </mat-card-title>
+      
+    </mat-card-header>
+  <form [formGroup]="lessonForm" (ngSubmit)="saved.emit(lessonForm.value)">
+    <mat-card-content >
+
+      <mat-form-field class="full-width" >
+        <input  matInput placeholder="Title" type="string"
+        formControlName="title">
+      </mat-form-field>
+      <br>
+
+      <mat-form-field class="full-width" >
+        <textarea matInput placeholder="Description" type="string"
+        formControlName="description">
+
+        </textarea>
+      </mat-form-field>
+      <br>
+
+      <section style="text-align: center;">
+        {{ lessonForm.value.percentComplete }}% Percent Complete
+        <mat-slider min="0" max="100" tickInterval="10" thumbLabel
+        matInput formControlName="percentComplete">
+
+        </mat-slider>
+      </section>
+      <br>
+
+      <section>
+        <mat-checkbox matInput formControlName="favorite">
+          Favorite
+        </mat-checkbox>
+      </section>
+      <br>
+
+    </mat-card-content>
+    <mat-card-actions style="display: flex; justify-content: space-between;">
+      <button [disabled]="lessonForm.invalid" type="submit" mat-button color="primary">Save</button>
+      <button type="button" mat-button (click)="cancelled.emit();lessonForm.reset();">
+        Cancel
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

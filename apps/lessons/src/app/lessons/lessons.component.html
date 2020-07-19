@@ -1,0 +1,10 @@
+<div class="lessons-containers">
+    <div class="lessons-list">
+        <thirty-lessons-list [lessons]="lessons$ | async" (selected)="select($event)" (deleted)="delete($event)">
+        </thirty-lessons-list>
+    </div>
+    <div class="lessons-detail">
+        <thirty-lessons-detail [lesson]="lesson$ | async" (saved)="save($event)" (cancelled)="cancel()"> 
+        </thirty-lessons-detail>
+    </div>
+</div>
